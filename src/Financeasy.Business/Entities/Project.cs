@@ -2,45 +2,80 @@
 using System.Collections.Generic;
 using Financeasy.Business.Core;
 using Financeasy.Business.Enumerators;
+using Financeasy.Business.Validations;
 
 namespace Financeasy.Business.Entities
 {
     public class Project : Entity
     {
         public string Name { get; private set; }
-        public string Description { get; set; }
-        public ProjectStatus Status { get; set; }
-        public DateTime? StartDate { get; set; }
-        public DateTime? ConclusionDate { get; set; }
+        public string Description { get; private set; }
+        public ProjectStatus Status { get; private set; }
+        public DateTime? StartDate { get; private set; }
+        public DateTime? ConclusionDate { get; private set; }
 
-        public string CEP { get; set; }
-        public string StreetAddress { get; set; }
-        public string Complement { get; set; }
-        public string District { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
+        public string CEP { get; private set; }
+        public string StreetAddress { get; private set; }
+        public string Complement { get; private set; }
+        public string District { get; private set; }
+        public string City { get; private set; }
+        public string State { get; private set; }
 
-        public DateTime RegisterDate { get; set; }
+        public virtual ICollection<Revenue> Revenues { get; private set; }
+        public virtual ICollection<Expense> Expenses { get; private set; }
 
-        public DateTime? UpdateDate { get; set; }
+        public Guid CustomerId { get; private set; }
+        public virtual Customer Customer { get; private set; }
 
-        public virtual ICollection<Revenue> Revenues { get; set; }
+        public Guid CategoryId { get; private set; }
+        public virtual Category Category { get; private set; }
 
-        public virtual ICollection<Expense> Expenses { get; set; }
+        public Guid UserId { get; private set; }
+        public virtual User User { get; private set; }
 
-        public long CustomerId { get; set; }
-        public virtual Customer Customer { get; set; }
+        public Project()
+        {
+        }
 
-        public long CategoryId { get; set; }
-        public virtual Category Category { get; set; }
+        public Project(string name, string description, Guid customerId, Guid categoryId, Guid userId)
+        {
+            Name = name;
+            Description = description;
+            CustomerId = customerId;
+            CategoryId = categoryId;
+            UserId = userId;
 
-        public long UserId { get; set; }
-
-        public virtual User User { get; set; }
+            Validate();
+        }
 
         protected override void Validate()
+            => Validate(new ProjectValidation(), this);
+
+        protected void ValidateAddress()
+            => Validate(new ProjectAddressValidation(), this);
+
+        public void ChangeAddress(string cEP, string streetAddress, string complement, string district, string city, string state)
         {
-            throw new NotImplementedException();
+            CEP = cEP;
+            StreetAddress = streetAddress;
+            Complement = complement;
+            District = district;
+            City = city;
+            State = state;
+
+            ValidateAddress();
         }
+
+        public void AddRevenue(Revenue revenue)
+            => Revenues.Add(revenue);
+
+        public void AddExpense(Expense expense)
+            => Expenses.Add(expense);
+
+        public void RemoveRevenue(Revenue revenue)
+            => Revenues.Remove(revenue);
+
+        public void RemoveExpense(Expense expense)
+            => Expenses.Remove(expense);
     }
 }
