@@ -1,24 +1,24 @@
-﻿using Financeasy.Business.Entities;
-using Financeasy.Business.Models;
+﻿using Financeasy.Business.Models;
 using System;
-using System.Collections.Generic;
 
 namespace Financeasy.Business.Interfaces.Services
 {
     public interface IUserService
     {
-        User GetById(Guid id);
+        void GetById(Guid id);
 
-        ICollection<User> GetAll();
+        void GetAll();
 
-        ICollection<User> GetAllActive();
+        void GetAllActive();
 
-        ICollection<User> GetAllInactive();
+        void GetAllInactive();
 
-        ICollection<User> GetAllBlocked();
+        void GetAllBlocked();
 
         void Add(UserPostModel model);
+
         void Update(UserPutModel model);
+
         void Delete(Guid id);
     }
 }

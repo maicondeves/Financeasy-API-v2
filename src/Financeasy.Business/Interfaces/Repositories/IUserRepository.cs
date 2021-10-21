@@ -14,6 +14,6 @@ namespace Financeasy.Business.Interfaces.Repositories
 
         ICollection<User> GetAllBlocked();
 
-        bool AlreadyExists(string email);
+        bool EmailAlreadyUsed(string email);
     }
 }

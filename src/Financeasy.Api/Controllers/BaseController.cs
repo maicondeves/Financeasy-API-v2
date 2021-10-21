@@ -1,5 +1,4 @@
-﻿using Financeasy.Business.Core;
-using Financeasy.Business.Interfaces.Core;
+﻿using Financeasy.Business.Interfaces.Core;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
@@ -10,10 +9,12 @@ namespace Financeasy.Api.Controllers
     public abstract class BaseController : ControllerBase
     {
         private readonly INotifier _notifier;
+        private readonly IMediator _mediator;
 
-        protected BaseController(INotifier notifier)
+        protected BaseController(INotifier notifier, IMediator mediator)
         {
             _notifier = notifier;
+            _mediator = mediator;
         }
 
         protected bool IsValidOperation()
@@ -37,22 +38,16 @@ namespace Financeasy.Api.Controllers
             }
         }
 
-        protected IActionResult DefaultResponse(Exception e)
-        {
-            Notify(e);
-            return DefaultResponse();
-        }
-
         protected IActionResult DefaultResponse(ModelStateDictionary modelState)
         {
             Notify(modelState);
-            return DefaultResponse();
+            return Response();
         }
 
-        protected IActionResult DefaultResponse(object result = null)
+        protected new IActionResult Response()
         {
             if (IsValidOperation())
-                return Ok(new { success = true, data = result });
+                return Ok(new { success = true, data = _mediator.GetReturnableValue() });
 
             return BadRequest(new { success = false, errors = _notifier.GetNotifications().Select(n => n.Message) });
         }

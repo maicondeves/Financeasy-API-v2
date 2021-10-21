@@ -12,23 +12,9 @@ namespace Financeasy.Api.Controllers
     {
         private readonly IUserService _userService;
 
-        public UserController(INotifier notifier, IUserService userService) : base(notifier)
+        public UserController(INotifier notifier, IMediator mediator, IUserService userService) : base(notifier, mediator)
         {
             _userService = userService;
-        }
-
-        [Route("{id}")]
-        [HttpGet]
-        public IActionResult GetById([FromRoute] Guid id)
-        {
-            try
-            {
-                return DefaultResponse(_userService.GetById(id));
-            }
-            catch (Exception e)
-            {
-                return DefaultResponse(e);
-            }
         }
 
         [Route("")]
@@ -37,12 +23,30 @@ namespace Financeasy.Api.Controllers
         {
             try
             {
-                return DefaultResponse(_userService.GetAll());
+                _userService.GetAll();
             }
             catch (Exception e)
             {
-                return DefaultResponse(e);
+                Notify(e);
             }
+
+            return Response();
+        }
+
+        [Route("{id}")]
+        [HttpGet]
+        public IActionResult GetById([FromRoute] Guid id)
+        {
+            try
+            {
+                _userService.GetById(id);
+            }
+            catch (Exception e)
+            {
+                Notify(e);
+            }
+
+            return Response();
         }
 
         [Route("active")]
@@ -51,12 +55,14 @@ namespace Financeasy.Api.Controllers
         {
             try
             {
-                return DefaultResponse(_userService.GetAllActive());
+                _userService.GetAllActive();
             }
             catch (Exception e)
             {
-                return DefaultResponse(e);
+                Notify(e);
             }
+
+            return Response();
         }
 
         [Route("blocked")]
@@ -65,12 +71,14 @@ namespace Financeasy.Api.Controllers
         {
             try
             {
-                return DefaultResponse(_userService.GetAllBlocked());
+                _userService.GetAllBlocked();
             }
             catch (Exception e)
             {
-                return DefaultResponse(e);
+                Notify(e);
             }
+
+            return Response();
         }
 
         [Route("inactive")]
@@ -79,12 +87,14 @@ namespace Financeasy.Api.Controllers
         {
             try
             {
-                return DefaultResponse(_userService.GetAllInactive());
+                _userService.GetAllInactive();
             }
             catch (Exception e)
             {
-                return DefaultResponse(e);
+                Notify(e);
             }
+
+            return Response();
         }
 
         [Route("")]
@@ -100,7 +110,7 @@ namespace Financeasy.Api.Controllers
                 Notify(e);
             }
 
-            return DefaultResponse();
+            return Response();
         }
 
         [Route("{id}")]
@@ -123,7 +133,7 @@ namespace Financeasy.Api.Controllers
                 Notify(e);
             }
 
-            return DefaultResponse();
+            return Response();
         }
 
         [Route("{id}")]
@@ -139,7 +149,7 @@ namespace Financeasy.Api.Controllers
                 Notify(e);
             }
 
-            return DefaultResponse();
+            return Response();
         }
     }
 }

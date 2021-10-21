@@ -93,6 +93,7 @@ namespace Financeasy.Api
         private void ConfigureCore(IServiceCollection services)
         {
             services.AddScoped<INotifier, Notifier>();
+            services.AddScoped<IMediator, Mediator>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
     }

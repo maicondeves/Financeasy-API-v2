@@ -36,7 +36,7 @@ namespace Financeasy.Infrastructure.Data.Repositories
                 .AsNoTracking()
                 .ToList();
 
-        public bool AlreadyExists(string email) =>
+        public bool EmailAlreadyUsed(string email) =>
             _dbSet.Any(x => x.Email == email);
     }
 }

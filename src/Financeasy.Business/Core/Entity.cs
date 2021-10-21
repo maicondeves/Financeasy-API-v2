@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FluentValidation;
+using System;
+using System.Linq;
 
 namespace Financeasy.Business.Core
 {
@@ -18,6 +20,20 @@ namespace Financeasy.Business.Core
         public void SetLastUpdate()
         {
             Updated = DateTime.Now;
+        }
+
+        protected abstract void Validate();
+
+        protected static void Validate<TV, TE>(TV validation, TE entity)
+            where TV : AbstractValidator<TE>
+            where TE : Entity
+        {
+            var validator = validation.Validate(entity);
+            if (!validator.IsValid)
+            {
+                var message = validator.Errors.FirstOrDefault()?.ErrorMessage;
+                throw new BusinessException(message);
+            }
         }
     }
 }

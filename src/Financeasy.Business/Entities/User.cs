@@ -1,6 +1,6 @@
 ﻿using Financeasy.Business.Core;
 using Financeasy.Business.Enumerators;
-using System;
+using Financeasy.Business.Validations;
 
 namespace Financeasy.Business.Entities
 {
@@ -21,19 +21,28 @@ namespace Financeasy.Business.Entities
             Email = email;
             Password = password;
             Status = UserStatus.Active;
+
+            Validate();
         }
 
-        public void Block() =>
-            Status = UserStatus.Blocked;
+        protected override void Validate() => Validate(new UserValidation(), this);
 
-        public bool IsBlocked() =>
-            Status == UserStatus.Blocked;
+        public void Block()
+            => Status = UserStatus.Blocked;
 
-        public void Update(string name, string email, string password)
+        public bool IsBlocked()
+            => Status == UserStatus.Blocked;
+
+        public void ChangeEmail(string email)
         {
-            Name = name;
             Email = email;
+            Validate();
+        }
+
+        public void ChangePassword(string password)
+        {
             Password = password;
+            Validate();
         }
     }
 }
