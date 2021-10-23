@@ -7,7 +7,7 @@ namespace Financeasy.Business.Models
     {
         public AutoMapperProfile()
         {
-            CreateMap<User, UserPostModel>().ReverseMap();
+            CreateMap<User, CustomerAddModel>().ReverseMap();
         }
     }
 }

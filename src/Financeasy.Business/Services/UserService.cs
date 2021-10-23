@@ -7,6 +7,7 @@ using Financeasy.Business.Interfaces.Services;
 using Financeasy.Business.Models;
 using Financeasy.Business.Services.Common;
 using System;
+using System.Collections.Generic;
 
 namespace Financeasy.Business.Services
 {
@@ -16,9 +17,8 @@ namespace Financeasy.Business.Services
 
         public UserService(
             INotifier notifier,
-            IMediator mediator,
             IUnitOfWork unitOfWork,
-            IUserRepository userRepository) : base(notifier, mediator, unitOfWork)
+            IUserRepository userRepository) : base(notifier, unitOfWork)
         {
             _userRepository = userRepository;
         }
@@ -27,7 +27,7 @@ namespace Financeasy.Business.Services
         {
             // Business rules and validations based in data that are stored on database.
             if (_userRepository.EmailAlreadyUsed(email))
-                throw new BusinessException("Already exists a user with this email.");
+                throw new BusinessException("Already exists a user with this email");
         }
 
         private User GetByIdIfExists(Guid id)
@@ -41,7 +41,7 @@ namespace Financeasy.Business.Services
             return user;
         }
 
-        public void Add(UserPostModel model)
+        public Guid Add(UserAddModel model)
         {
             // Check if the email received is already in use is called, if already in use, a BusinessException will be thrown.
             CheckIfEmailIsUsed(model.Email);
@@ -56,10 +56,10 @@ namespace Financeasy.Business.Services
             Commit();
 
             // Return the Id of the User recently created.
-            Return(user.Id);
+            return user.Id;
         }
 
-        public void Update(UserPutModel model)
+        public void Update(UserUpdateModel model)
         {
             // Get the User entity by Id, if the user doesn't exists, a BusinessException will be thrown.
             var user = GetByIdIfExists(model.Id);
@@ -88,19 +88,19 @@ namespace Financeasy.Business.Services
             Commit();
         }
 
-        public void GetById(Guid id)
-            => Return(_userRepository.GetById(id));
+        public User GetById(Guid id)
+            => _userRepository.GetById(id);
 
-        public void GetAll()
-            => Return(_userRepository.GetAll());
+        public ICollection<User> GetAll()
+            => _userRepository.GetAll();
 
-        public void GetAllActive()
-            => Return(_userRepository.GetAllActive());
+        public ICollection<User> GetAllActive()
+            => _userRepository.GetAllActive();
 
-        public void GetAllInactive()
-            => Return(_userRepository.GetAllInactive());
+        public ICollection<User> GetAllInactive()
+            => _userRepository.GetAllInactive();
 
-        public void GetAllBlocked()
-            => Return(_userRepository.GetAllBlocked());
+        public ICollection<User> GetAllBlocked()
+            => _userRepository.GetAllBlocked();
     }
 }

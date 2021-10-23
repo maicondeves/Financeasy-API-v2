@@ -22,7 +22,7 @@ namespace Financeasy.Business.Core
             Updated = DateTime.Now;
         }
 
-        protected abstract void Validate();
+        protected abstract void ValidateBase();
 
         protected static void Validate<TV, TE>(TV validation, TE entity)
             where TV : AbstractValidator<TE>

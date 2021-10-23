@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Financeasy.Business.Core;
+﻿using Financeasy.Business.Core;
 using Financeasy.Business.Enumerators;
 using Financeasy.Business.Validations;
+using System;
+using System.Collections.Generic;
 
 namespace Financeasy.Business.Entities
 {
@@ -45,10 +45,10 @@ namespace Financeasy.Business.Entities
             CategoryId = categoryId;
             UserId = userId;
 
-            Validate();
+            ValidateBase();
         }
 
-        protected override void Validate()
+        protected override void ValidateBase()
             => Validate(new ProjectValidation(), this);
 
         protected void ValidateAddress()

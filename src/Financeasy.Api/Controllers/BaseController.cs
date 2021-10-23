@@ -9,12 +9,10 @@ namespace Financeasy.Api.Controllers
     public abstract class BaseController : ControllerBase
     {
         private readonly INotifier _notifier;
-        private readonly IMediator _mediator;
 
-        protected BaseController(INotifier notifier, IMediator mediator)
+        protected BaseController(INotifier notifier)
         {
             _notifier = notifier;
-            _mediator = mediator;
         }
 
         protected bool IsValidOperation()
@@ -38,16 +36,22 @@ namespace Financeasy.Api.Controllers
             }
         }
 
-        protected IActionResult DefaultResponse(ModelStateDictionary modelState)
+        protected new IActionResult Response(ModelStateDictionary modelState)
         {
             Notify(modelState);
             return Response();
         }
 
-        protected new IActionResult Response()
+        protected new IActionResult Response(Exception expection)
+        {
+            Notify(expection);
+            return Response();
+        }
+
+        protected new IActionResult Response(object result = null)
         {
             if (IsValidOperation())
-                return Ok(new { success = true, data = _mediator.GetReturnableValue() });
+                return Ok(new { success = true, data = result });
 
             return BadRequest(new { success = false, errors = _notifier.GetNotifications().Select(n => n.Message) });
         }

@@ -1,6 +1,6 @@
-﻿using System;
-using Financeasy.Business.Core;
+﻿using Financeasy.Business.Core;
 using Financeasy.Business.Validations;
+using System;
 
 namespace Financeasy.Business.Entities
 {
@@ -26,7 +26,7 @@ namespace Financeasy.Business.Entities
         public Guid UserId { get; set; }
         public virtual User User { get; set; }
 
-        protected override void Validate() => Validate(new CustomerValidation(), this);
+        protected override void ValidateBase() => Validate(new CustomerValidation(), this);
 
         protected void ValidateAddress() => Validate(new CustomerAddressValidation(), this);
 
@@ -44,7 +44,7 @@ namespace Financeasy.Business.Entities
             Email = email;
             UserId = userId;
 
-            Validate();
+            ValidateBase();
         }
 
         public void ChangeAddress(string cep, string streetAddress, string complement, string district, string city, string state)

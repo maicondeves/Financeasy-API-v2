@@ -1,7 +1,7 @@
-﻿using System;
-using Financeasy.Business.Core;
+﻿using Financeasy.Business.Core;
 using Financeasy.Business.Enumerators;
 using Financeasy.Business.Validations;
+using System;
 
 namespace Financeasy.Business.Entities
 {
@@ -40,17 +40,17 @@ namespace Financeasy.Business.Entities
             CategoryId = categoryId;
             UserId = userId;
 
-            Validate();
+            ValidateBase();
         }
 
-        protected override void Validate() => Validate(new RevenueValidation(), this);
+        protected override void ValidateBase() => Validate(new RevenueValidation(), this);
 
         public void Receive(decimal receivedAmount)
         {
             ReceivedAmount += receivedAmount;
             ReceivedDate = DateTime.Now;
 
-            Validate();
+            ValidateBase();
         }
     }
 }

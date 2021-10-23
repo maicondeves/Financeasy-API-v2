@@ -22,10 +22,10 @@ namespace Financeasy.Business.Entities
             Password = password;
             Status = UserStatus.Active;
 
-            Validate();
+            ValidateBase();
         }
 
-        protected override void Validate() => Validate(new UserValidation(), this);
+        protected override void ValidateBase() => Validate(new UserValidation(), this);
 
         public void Block()
             => Status = UserStatus.Blocked;
@@ -36,13 +36,13 @@ namespace Financeasy.Business.Entities
         public void ChangeEmail(string email)
         {
             Email = email;
-            Validate();
+            ValidateBase();
         }
 
         public void ChangePassword(string password)
         {
             Password = password;
-            Validate();
+            ValidateBase();
         }
     }
 }

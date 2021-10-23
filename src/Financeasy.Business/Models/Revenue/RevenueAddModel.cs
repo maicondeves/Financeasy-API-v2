@@ -1,8 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Financeasy.Business.Models
+﻿namespace Financeasy.Business.Models
 {
-    public class UserPostModel
+    public class RevenueAddModel
     {
         public string Name { get; set; }
 

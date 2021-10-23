@@ -12,6 +12,12 @@ namespace Financeasy.Infrastructure.Data.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UserMap());
+            modelBuilder.ApplyConfiguration(new CustomerMap());
+            modelBuilder.ApplyConfiguration(new CategoryMap());
+            modelBuilder.ApplyConfiguration(new ExpenseMap());
+            modelBuilder.ApplyConfiguration(new RevenueMap());
+            modelBuilder.ApplyConfiguration(new ProjectMap());
+
             base.OnModelCreating(modelBuilder);
         }
     }

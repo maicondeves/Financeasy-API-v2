@@ -1,7 +1,7 @@
-﻿using System;
-using Financeasy.Business.Core;
+﻿using Financeasy.Business.Core;
 using Financeasy.Business.Enumerators;
 using Financeasy.Business.Validations;
+using System;
 
 namespace Financeasy.Business.Entities
 {
@@ -42,10 +42,10 @@ namespace Financeasy.Business.Entities
             CategoryId = categoryId;
             UserId = userId;
 
-            Validate();
+            ValidateBase();
         }
 
-        protected override void Validate() => Validate(new ExpenseValidation(), this);
+        protected override void ValidateBase() => Validate(new ExpenseValidation(), this);
 
         public void Pay(decimal paymentAmount)
         {

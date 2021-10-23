@@ -1,7 +1,7 @@
-﻿using System;
-using Financeasy.Business.Core;
+﻿using Financeasy.Business.Core;
 using Financeasy.Business.Enumerators;
 using Financeasy.Business.Validations;
+using System;
 
 namespace Financeasy.Business.Entities
 {
@@ -24,9 +24,9 @@ namespace Financeasy.Business.Entities
             Type = type;
             UserId = userId;
 
-            Validate();
+            ValidateBase();
         }
 
-        protected override void Validate() => Validate(new CategoryValidation(), this);
+        protected override void ValidateBase() => Validate(new CategoryValidation(), this);
     }
 }

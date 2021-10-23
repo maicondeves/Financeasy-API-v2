@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Financeasy.Infrastructure.Data.Mappings
 {
-    public class UserMap : IEntityTypeConfiguration<User>
+    public class CustomerMap : IEntityTypeConfiguration<Customer>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<Customer> builder)
         {
-            builder.ToTable(nameof(User));
+            builder.ToTable(nameof(Customer));
             builder.HasKey(e => e.Id);
 
             builder.Property(e => e.Name)
@@ -16,22 +16,6 @@ namespace Financeasy.Infrastructure.Data.Mappings
                .HasColumnType("varchar")
                .HasMaxLength(100)
                .IsRequired();
-
-            builder.Property(e => e.Email)
-                .HasColumnName("Email")
-                .HasColumnType("varchar")
-                .HasMaxLength(100)
-                .IsRequired();
-
-            builder.Property(e => e.Password)
-                .HasColumnName("Password")
-                .HasColumnType("varchar")
-                .HasMaxLength(100)
-                .IsRequired();
-
-            builder.Property(e => e.Status)
-                .HasColumnName("Status")
-                .HasColumnType("smallint");
 
             builder.Property(e => e.Created)
                .HasColumnName("Created")

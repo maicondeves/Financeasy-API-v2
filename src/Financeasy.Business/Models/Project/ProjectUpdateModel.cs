@@ -2,7 +2,7 @@
 
 namespace Financeasy.Business.Models
 {
-    public class UserPutModel
+    public class ProjectUpdateModel
     {
         public Guid Id { get; set; }
 
