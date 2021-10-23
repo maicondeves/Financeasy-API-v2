@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace Financeasy.Business.Services
 {
-    public class CustomerService : Service, ICustomerService
+    public sealed class CustomerService : Service, ICustomerService
     {
         private readonly ICustomerRepository _customerService;
 

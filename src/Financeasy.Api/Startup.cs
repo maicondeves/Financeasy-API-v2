@@ -83,17 +83,26 @@ namespace Financeasy.Api
         private void ConfigureBusinessServices(IServiceCollection services)
         {
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IExpenseService, ExpenseService>();
+            services.AddScoped<IRevenueService, RevenueService>();
+            services.AddScoped<IProjectService, ProjectService>();
         }
 
         private void ConfigureRepositories(IServiceCollection services)
         {
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IExpenseRepository, ExpenseRepository>();
+            services.AddScoped<IRevenueRepository, RevenueRepository>();
+            services.AddScoped<IProjectRepository, ProjectRepository>();
         }
 
         private void ConfigureCore(IServiceCollection services)
         {
             services.AddScoped<INotifier, Notifier>();
-            services.AddScoped<IMediator, Mediator>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
     }

@@ -2,7 +2,7 @@
 
 namespace Financeasy.Business.Core
 {
-    public class BusinessException : Exception
+    public sealed class BusinessException : Exception
     {
         public BusinessException(string message) : base(message)
         {

@@ -1,5 +1,6 @@
 ﻿using Financeasy.Business.Core;
 using Financeasy.Business.Enumerators;
+using Financeasy.Business.Models;
 using Financeasy.Business.Validations;
 using System;
 
@@ -23,10 +24,21 @@ namespace Financeasy.Business.Entities
             Name = name;
             Type = type;
             UserId = userId;
-
             ValidateBase();
         }
 
         protected override void ValidateBase() => Validate(new CategoryValidation(), this);
+
+        public void ChangeName(string name)
+        {
+            Name = name;
+            ValidateBase();
+        }
+
+        public void ChangeType(CategoryType type)
+        {
+            Type = type;
+            ValidateBase();
+        }
     }
 }

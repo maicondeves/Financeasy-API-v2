@@ -32,7 +32,7 @@ namespace Financeasy.Infrastructure.Data.Common
             _dbSet.Remove(entity);
         }
 
-        public TEntity GetById(Guid id)
+        public virtual TEntity GetById(Guid id)
         {
             return _dbSet.Find(id);
         }

@@ -1,4 +1,6 @@
-﻿using Financeasy.Business.Entities;
+﻿using Financeasy.Business.Core;
+using Financeasy.Business.Entities;
+using Financeasy.Business.Enumerators;
 using Financeasy.Business.Interfaces.Core;
 using Financeasy.Business.Interfaces.Repositories;
 using Financeasy.Business.Interfaces.Repositories.Common;
@@ -10,7 +12,7 @@ using System.Collections.Generic;
 
 namespace Financeasy.Business.Services
 {
-    public class CategoryService : Service, ICategoryService
+    public sealed class CategoryService : Service, ICategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
 
@@ -22,29 +24,81 @@ namespace Financeasy.Business.Services
             _categoryRepository = categoryRepository;
         }
 
+        private Category GetByIdIfExists(Guid id)
+        {
+            // Business rules and validations based in data that are stored on database.
+            var category = _categoryRepository.GetById(id);
+
+            if (category is null)
+                throw new BusinessException("Category not found");
+
+            return category;
+        }
+
+        private static void ValidateType(CategoryType type)
+        {
+            if (!Enum.IsDefined(typeof(CategoryType), type))
+                throw new BusinessException("Category type is invalid");
+        }
+
         public Guid Add(CategoryAddModel model)
         {
-            throw new NotImplementedException();
-        }
+            // Validate if value on Enum is valid
+            ValidateType(model.Type);
 
-        public void Delete(Guid id)
-        {
-            throw new NotImplementedException();
-        }
+            var category = new Category(model.Name, model.Type, model.UserId);
 
-        public ICollection<Category> GetAll()
-        {
-            throw new NotImplementedException();
-        }
+            _categoryRepository.Add(category);
 
-        public Category GetById(Guid id)
-        {
-            throw new NotImplementedException();
+            // Confirm the changes on database.
+            Commit();
+
+            // Return the Id recently created.
+            return category.Id;
         }
 
         public void Update(CategoryUpdateModel model)
         {
-            throw new NotImplementedException();
+            // Validate if value on Enum is valid
+            ValidateType(model.Type);
+
+            // Get the entity by Id, if the entity doesn't exists, a BusinessException will be thrown.
+            var category = GetByIdIfExists(model.Id);
+
+            category.ChangeName(model.Name);
+            category.ChangeType(model.Type);
+
+            // Persist entity on database using EntityFrameworkCore.
+            _categoryRepository.Update(category);
+
+            // Confirm the changes on database.
+            Commit();
+        }
+
+        public void Delete(Guid id)
+        {
+            // Get the entity by Id, if the entity doesn't exists, a BusinessException will be thrown.
+            var category = GetByIdIfExists(id);
+
+            // Delete the entity from database.
+            _categoryRepository.Remove(category);
+
+            // Confirm the changes on database.
+            Commit();
+        }
+
+        public Category GetById(Guid id)
+            => _categoryRepository.GetById(id);
+
+        public ICollection<Category> GetAll()
+            => _categoryRepository.GetAll();
+
+        public ICollection<Category> GetAllByType(CategoryType type)
+        {
+            // Validate if value on Enum is valid
+            ValidateType(type);
+
+            return _categoryRepository.GetAllByType(type);
         }
     }
 }

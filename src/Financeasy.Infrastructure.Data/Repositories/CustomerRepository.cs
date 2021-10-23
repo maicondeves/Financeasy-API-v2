@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Financeasy.Infrastructure.Data.Repositories
 {
-    public class CustomerRepository : Repository<Customer>, ICustomerRepository
+    public sealed class CustomerRepository : Repository<Customer>, ICustomerRepository
     {
         public CustomerRepository(FinanceasyContext dbContext) : base(dbContext)
         {

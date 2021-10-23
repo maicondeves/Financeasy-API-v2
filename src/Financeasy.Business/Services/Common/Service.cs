@@ -1,5 +1,6 @@
 ﻿using Financeasy.Business.Interfaces.Core;
 using Financeasy.Business.Interfaces.Repositories.Common;
+using System;
 
 namespace Financeasy.Business.Services.Common
 {
@@ -17,7 +18,7 @@ namespace Financeasy.Business.Services.Common
         protected void Commit()
         {
             if (_unitOfWork.Commit().Equals(0))
-                Notify("Error saving information on database");
+                throw new Exception("Error saving information on database");
         }
 
         protected void Notify(string message)

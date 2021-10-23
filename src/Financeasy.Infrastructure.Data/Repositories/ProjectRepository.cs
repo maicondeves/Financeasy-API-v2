@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Financeasy.Infrastructure.Data.Repositories
 {
-    public class ProjectRepository : Repository<Project>, IProjectRepository
+    public sealed class ProjectRepository : Repository<Project>, IProjectRepository
     {
         public ProjectRepository(FinanceasyContext dbContext) : base(dbContext)
         {

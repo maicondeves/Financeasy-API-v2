@@ -11,20 +11,14 @@ namespace Financeasy.Infrastructure.Data.Mappings
             builder.ToTable(nameof(Category));
             builder.HasKey(e => e.Id);
 
-            builder.Property(e => e.Name)
-               .HasColumnName("Name")
-               .HasColumnType("varchar")
-               .HasMaxLength(100)
-               .IsRequired();
+            builder.Property(e => e.Created).HasColumnName("Created").HasColumnType("datetime").IsRequired();
+            builder.Property(e => e.Updated).HasColumnName("Updated").HasColumnType("datetime");
 
-            builder.Property(e => e.Created)
-               .HasColumnName("Created")
-               .HasColumnType("datetime")
-               .IsRequired();
+            builder.Property(x => x.Name).HasColumnName("Name").HasColumnType("varchar").HasMaxLength(30).IsRequired();
+            builder.Property(x => x.Type).HasColumnName("Type").HasColumnType("smallint").IsRequired();
 
-            builder.Property(e => e.Updated)
-               .HasColumnName("Updated")
-               .HasColumnType("datetime");
+            builder.Property(x => x.UserId).HasColumnName("UserId").HasColumnType("uniqueidentifier").IsRequired();
+            builder.HasOne(x => x.User).WithMany().HasForeignKey(x => x.UserId);
         }
     }
 }

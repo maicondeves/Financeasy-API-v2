@@ -1,8 +1,10 @@
-﻿using Financeasy.Business.Interfaces.Core;
+﻿using Financeasy.Business.Enumerators;
+using Financeasy.Business.Interfaces.Core;
 using Financeasy.Business.Interfaces.Services;
 using Financeasy.Business.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Net.Http;
 
 namespace Financeasy.Api.Controllers
 {
@@ -86,6 +88,20 @@ namespace Financeasy.Api.Controllers
             try
             {
                 return Response(_categoryService.GetAll());
+            }
+            catch (Exception e)
+            {
+                return Response(e);
+            }
+        }
+
+        [Route("types/{type}")]
+        [HttpGet]
+        public IActionResult GetAllByType(CategoryType type)
+        {
+            try
+            {
+                return Response(_categoryService.GetAllByType(type));
             }
             catch (Exception e)
             {

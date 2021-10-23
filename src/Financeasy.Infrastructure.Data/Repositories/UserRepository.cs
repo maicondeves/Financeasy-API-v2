@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace Financeasy.Infrastructure.Data.Repositories
 {
-    public class UserRepository : Repository<User>, IUserRepository
+    public sealed class UserRepository : Repository<User>, IUserRepository
     {
         public UserRepository(FinanceasyContext dbContext) : base(dbContext)
         {

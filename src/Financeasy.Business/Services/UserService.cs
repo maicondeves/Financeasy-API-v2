@@ -11,7 +11,7 @@ using System.Collections.Generic;
 
 namespace Financeasy.Business.Services
 {
-    public class UserService : Service, IUserService
+    public sealed class UserService : Service, IUserService
     {
         private readonly IUserRepository _userRepository;
 
@@ -71,8 +71,10 @@ namespace Financeasy.Business.Services
             user.ChangeEmail(model.Email);
             user.ChangePassword(model.Password);
 
+            // Persist entity on database using EntityFrameworkCore.
             _userRepository.Update(user);
 
+            // Confirm the changes on database.
             Commit();
         }
 
