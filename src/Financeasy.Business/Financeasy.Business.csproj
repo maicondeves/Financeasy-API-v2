@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
-    <PackageReference Include="FluentValidation" Version="10.3.3" />
+    <PackageReference Include="Financeasy.Core" Version="2.0.0" />
+    <PackageReference Include="FluentValidation" Version="10.3.4" />
   </ItemGroup>
 </Project>

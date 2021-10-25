@@ -1,6 +1,4 @@
-using Financeasy.Business.Core;
 using Financeasy.Business.Entities;
-using Financeasy.Business.Enumerators;
 using Xunit;
 
 namespace Financeasy.UnitTests

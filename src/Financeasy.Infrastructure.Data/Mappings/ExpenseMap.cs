@@ -18,7 +18,7 @@ namespace Financeasy.Infrastructure.Data.Mappings
             builder.Property(x => x.Status).HasColumnName("Status").HasColumnType("smallint").IsRequired();
             builder.Property(x => x.ExpirationDate).HasColumnName("ExpirationDate").HasColumnType("date").IsRequired();
             builder.Property(x => x.Amount).HasColumnName("Amount").HasColumnType("decimal").IsRequired();
-            builder.Property(x => x.PaymentAmount).HasColumnName("PaymentAmount").HasColumnType("decimal");
+            builder.Property(x => x.PaymentAmount).HasColumnName("PaymentAmount").HasColumnType("decimal").IsRequired();
             builder.Property(x => x.PaymentDate).HasColumnName("PaymentDate").HasColumnType("date");
             builder.Property(x => x.MonthPeriod).HasColumnName("MonthPeriod").HasColumnType("smallint").IsRequired();
             builder.Property(x => x.YearPeriod).HasColumnName("YearPeriod").HasColumnType("smallint").IsRequired();

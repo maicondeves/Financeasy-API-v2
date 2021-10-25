@@ -1,12 +1,9 @@
-﻿using Financeasy.Business.Core;
-using Financeasy.Business.Entities;
+﻿using Financeasy.Business.Entities;
 using Financeasy.Business.Enumerators;
-using Financeasy.Business.Interfaces.Core;
 using Financeasy.Business.Interfaces.Repositories;
-using Financeasy.Business.Interfaces.Repositories.Common;
 using Financeasy.Business.Interfaces.Services;
 using Financeasy.Business.Models;
-using Financeasy.Business.Services.Common;
+using Financeasy.Core;
 using System;
 using System.Collections.Generic;
 

@@ -1,5 +1,5 @@
 ﻿using Financeasy.Business.Entities;
-using Financeasy.Business.Interfaces.Repositories.Common;
+using Financeasy.Core;
 using System.Collections.Generic;
 
 namespace Financeasy.Business.Interfaces.Repositories

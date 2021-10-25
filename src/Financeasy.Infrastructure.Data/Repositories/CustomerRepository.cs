@@ -1,6 +1,5 @@
 ﻿using Financeasy.Business.Entities;
 using Financeasy.Business.Interfaces.Repositories;
-using Financeasy.Infrastructure.Data.Common;
 using Financeasy.Infrastructure.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;

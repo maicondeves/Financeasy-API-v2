@@ -1,8 +1,8 @@
-﻿using Financeasy.Business.Interfaces.Repositories.Common;
+﻿using Financeasy.Core;
 using Financeasy.Infrastructure.Data.Contexts;
 using System;
 
-namespace Financeasy.Infrastructure.Data.Common
+namespace Financeasy.Infrastructure.Data
 {
     public class UnitOfWork : IUnitOfWork
     {

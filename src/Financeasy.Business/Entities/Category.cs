@@ -1,7 +1,6 @@
-﻿using Financeasy.Business.Core;
-using Financeasy.Business.Enumerators;
-using Financeasy.Business.Models;
+﻿using Financeasy.Business.Enumerators;
 using Financeasy.Business.Validations;
+using Financeasy.Core;
 using System;
 
 namespace Financeasy.Business.Entities

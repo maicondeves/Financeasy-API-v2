@@ -1,6 +1,6 @@
-﻿using Financeasy.Business.Core;
-using Financeasy.Business.Enumerators;
+﻿using Financeasy.Business.Enumerators;
 using Financeasy.Business.Validations;
+using Financeasy.Core;
 
 namespace Financeasy.Business.Entities
 {

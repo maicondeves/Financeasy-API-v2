@@ -1,11 +1,9 @@
 using Financeasy.Api.Configs;
-using Financeasy.Business.Core;
-using Financeasy.Business.Interfaces.Core;
 using Financeasy.Business.Interfaces.Repositories;
-using Financeasy.Business.Interfaces.Repositories.Common;
 using Financeasy.Business.Interfaces.Services;
 using Financeasy.Business.Services;
-using Financeasy.Infrastructure.Data.Common;
+using Financeasy.Core;
+using Financeasy.Infrastructure.Data;
 using Financeasy.Infrastructure.Data.Contexts;
 using Financeasy.Infrastructure.Data.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -38,6 +36,9 @@ namespace Financeasy.Api
             // Register AutoMapper
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             AutoMapperConfig.RegisterMappings();
+
+            // Register services of Financeasy Core (Nuget Package)
+            services.AddFinanceasyCore();
 
             // Register all the business services.
             RegisterServices(services);
@@ -77,7 +78,6 @@ namespace Financeasy.Api
         {
             ConfigureBusinessServices(services);
             ConfigureRepositories(services);
-            ConfigureCore(services);
         }
 
         private void ConfigureBusinessServices(IServiceCollection services)
@@ -98,11 +98,6 @@ namespace Financeasy.Api
             services.AddScoped<IExpenseRepository, ExpenseRepository>();
             services.AddScoped<IRevenueRepository, RevenueRepository>();
             services.AddScoped<IProjectRepository, ProjectRepository>();
-        }
-
-        private void ConfigureCore(IServiceCollection services)
-        {
-            services.AddScoped<INotifier, Notifier>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
     }

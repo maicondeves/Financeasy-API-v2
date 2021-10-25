@@ -1,9 +1,9 @@
-﻿using Financeasy.Business.Core;
+﻿using Financeasy.Core;
 using Financeasy.Infrastructure.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace Financeasy.Infrastructure.Data.Common
+namespace Financeasy.Infrastructure.Data
 {
     public abstract class Repository<TEntity> where TEntity : Entity, new()
     {

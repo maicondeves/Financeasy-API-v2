@@ -1,5 +1,5 @@
-﻿using Financeasy.Business.Core;
-using Financeasy.Business.Validations;
+﻿using Financeasy.Business.Validations;
+using Financeasy.Core;
 using System;
 
 namespace Financeasy.Business.Entities
