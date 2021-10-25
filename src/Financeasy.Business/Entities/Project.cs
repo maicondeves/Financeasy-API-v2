@@ -67,10 +67,20 @@ namespace Financeasy.Business.Entities
         }
 
         public void AddRevenue(Revenue revenue)
-            => Revenues.Add(revenue);
+        {
+            if (Revenues is null)
+                Revenues = new List<Revenue>();
+
+            Revenues.Add(revenue);
+        }
 
         public void AddExpense(Expense expense)
-            => Expenses.Add(expense);
+        {
+            if (Expenses is null)
+                Expenses = new List<Expense>();
+
+            Expenses.Add(expense);
+        }
 
         public void RemoveRevenue(Revenue revenue)
             => Revenues.Remove(revenue);

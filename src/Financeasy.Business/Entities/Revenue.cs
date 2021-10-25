@@ -10,7 +10,7 @@ namespace Financeasy.Business.Entities
         public string Description { get; private set; }
         public RevenueStatus Status { get; private set; }
         public decimal ReceivableAmount { get; private set; }
-        public decimal? ReceivedAmount { get; private set; }
+        public decimal ReceivedAmount { get; private set; }
         public DateTime? ReceivedDate { get; private set; }
         public Month MonthPeriod { get; private set; }
         public short YearPeriod { get; private set; }
@@ -34,6 +34,7 @@ namespace Financeasy.Business.Entities
             Description = description;
             Status = status;
             ReceivableAmount = receivableAmount;
+            ReceivedAmount = 0;
             MonthPeriod = monthPeriod;
             YearPeriod = yearPeriod;
             ProjectId = projectId;
@@ -49,8 +50,6 @@ namespace Financeasy.Business.Entities
         {
             ReceivedAmount += receivedAmount;
             ReceivedDate = DateTime.Now;
-
-            ValidateBase();
         }
     }
 }

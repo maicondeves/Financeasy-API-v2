@@ -11,7 +11,7 @@ namespace Financeasy.Business.Entities
         public ExpenseStatus Status { get; private set; }
         public DateTime ExpirationDate { get; private set; }
         public decimal Amount { get; private set; }
-        public decimal? PaymentAmount { get; private set; }
+        public decimal PaymentAmount { get; private set; }
         public DateTime? PaymentDate { get; private set; }
         public Month MonthPeriod { get; private set; }
         public short YearPeriod { get; private set; }
@@ -36,6 +36,7 @@ namespace Financeasy.Business.Entities
             Status = status;
             ExpirationDate = expirationDate;
             Amount = amount;
+            PaymentAmount = 0;
             MonthPeriod = monthPeriod;
             YearPeriod = yearPeriod;
             ProjectId = projectId;
